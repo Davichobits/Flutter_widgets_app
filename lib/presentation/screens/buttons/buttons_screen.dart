@@ -48,27 +48,47 @@ class _BottonsView extends StatelessWidget {
             ),
             OutlinedButton(onPressed: () {}, child: const Text('Outline')),
             OutlinedButton.icon(
-              onPressed: () {}, 
+              onPressed: () {},
               label: const Text('Outline icon'),
               icon: const Icon(Icons.cached_outlined),
             ),
-            TextButton(onPressed: (){}, child: const Text('Text')),
+            TextButton(onPressed: () {}, child: const Text('Text')),
             TextButton.icon(
-              onPressed: (){}, 
-              label: const Text('Text'),
-              icon: const Icon(Icons.add_box)
-            ),
-            //TODO: custom button
-            IconButton(onPressed: (){}, icon: const Icon(Icons.shield_moon_sharp)),
+                onPressed: () {},
+                label: const Text('Text'),
+                icon: const Icon(Icons.add_box)),
+            const CustomButton(),
             IconButton(
-              onPressed: (){}, 
+                onPressed: () {}, icon: const Icon(Icons.shield_moon_sharp)),
+            IconButton(
+              onPressed: () {},
               icon: const Icon(Icons.shield_moon_sharp),
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(colors.primary),
-                iconColor: const MaterialStatePropertyAll(Colors.white)
-              ),
+                  backgroundColor: MaterialStatePropertyAll(colors.primary),
+                  iconColor: const MaterialStatePropertyAll(Colors.white)),
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Material(
+        color: colors.primary,
+        child: InkWell(
+          onTap: (){},
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text('Personalizado', style: TextStyle(color: Colors.white),),
+            ),
         ),
       ),
     );
