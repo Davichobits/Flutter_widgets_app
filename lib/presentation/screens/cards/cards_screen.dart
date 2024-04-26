@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 const cards = <Map<String, dynamic>>[
   {'elevation': 0.0, 'label': 'Elevation 0'},
@@ -36,11 +38,23 @@ class _CardsView extends StatelessWidget {
             elevation: card['elevation'],
             label: card['label'],
           )),
+
           ...cards.map((card) => _CardType2(
           elevation: card['elevation'],
           label: card['label'],
-          )
-        )
+          )),
+
+          ...cards.map((card) => _CardType3(
+          elevation: card['elevation'],
+          label: card['label'],
+          )),
+
+          ...cards.map((card) => _CardType4(
+          elevation: card['elevation'],
+          label: card['label'],
+          )),
+
+          const SizedBox(height: 50)
         ],
       ),
     );
@@ -122,6 +136,83 @@ class _CardType2 extends StatelessWidget {
           ],
           ),
       ),
+    );
+  }
+}
+
+class _CardType3 extends StatelessWidget {
+  final String label;
+  final double elevation;
+
+  const _CardType3({
+    required this.label,
+    required this.elevation,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+
+    final colors = Theme.of(context).colorScheme;
+
+    return Card(
+      color: colors.surfaceVariant,
+      elevation: elevation,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: (){}, 
+                icon: const Icon(Icons.more_vert_outlined)
+              )
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Text('$label - Filled'),
+            ),
+          ],
+          ),
+      ),
+    );
+  }
+}
+
+class _CardType4 extends StatelessWidget {
+  final String label;
+  final double elevation;
+
+  const _CardType4({
+    required this.label,
+    required this.elevation,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+
+    final colors = Theme.of(context).colorScheme;
+
+    return Card(
+      clipBehavior: Clip.hardEdge, // overflow: hidden
+      elevation: elevation,
+      child: Stack(
+        children: [
+          Image.network(
+            'https://picsum.photos/id/${elevation.toInt()}/600/250',
+            height: 350,
+            fit: BoxFit.cover,
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              onPressed: (){}, 
+              icon: const Icon(Icons.more_vert_outlined),
+              color: Colors.white,
+            )
+          ),
+        ],
+        ),
     );
   }
 }
